@@ -1,0 +1,62 @@
+body {
+
+    background: #121212;
+
+}
+
+
+.bag-black {
+
+
+    background: #090909;
+
+
+}
+
+.inputt {
+
+    border-color: #0d6efd;
+    border-radius: 10px;
+
+}
+
+.botonimage {
+
+
+    background-size: 10px;
+    background-repeat: repeat;
+    background-position: 10px;
+
+
+
+}
+
+.texto {
+
+    font-family: monospace;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.table-bordered {
+
+
+    border-color: #0d6efd;
+}
+
+
+
+.rojos {
+    background-color: red;
+}
+
+.azull{
+    background-color: blue;
+}
+
+.code {
+    border-style: groove groove groove none;
+}
+
+
+

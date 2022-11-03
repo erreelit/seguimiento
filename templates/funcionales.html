@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div>
+
+  <div class="row">
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-3">
+
+      <form action="/SaveFun" method="POST" class="card bg-dark text-light">
+        {% include 'partials/_messages.html' %}
+
+        <div class="card-body p-4">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <center class="form-control rounded-0 bg-dark border-0 text-white">
+            <h4>Registrar FUncional</h4>
+          </center>
+
+          <div class="mb-3">
+            <label for="E_nombre">Nombre del Funcional:</label>
+            <input type="text" name="F_nombre" placeholder="nombre" required
+              class="form-control  inputt bg-dark  text-white">
+
+          </div>
+          <div class="mb-3">
+            <button class="btn btn-primary btn-sm rounded-0">Registrar funcional</button>
+          </div>
+
+        </div>
+
+      </form>
+
+
+    </div>
+
+    <div class="col-md-5">
+
+
+      <table class="table table-striped  table-bordered card card-body p-5">
+
+        <tr>
+          <th>nombre</th>
+          <th>accion 1</th>
+          <th>accion 2</th>
+        </tr>
+
+        {% for func in fun%}
+
+        <tr>
+
+          <td>{{func.F_nombre}}</td>
+          <td>
+
+
+            <a href="/Deletefun/{{func.id}}" class="btn btn-danger btn-sm rounded-0">eliminar</a>
+
+          </td>
+
+          <td>
+            <a href="/updatefun/{{func.id}}" class="btn btn-primary btn-sm rounded-0">actualizar</a>
+          </td>
+
+        </tr>
+
+        {% endfor %}
+      </table>
+
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+{% endblock %}

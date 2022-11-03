@@ -1,0 +1,631 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+<div class="col-md-8">
+
+
+
+    <div class="col-md-9 offset-md-1 row">
+        <div class="col-md-6">
+            <div class="mb-3  bg-dark">
+                <form action="/buscarINI" method="POST" class="bg-dark text-light">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                    <div class="input-group mb-3">
+                        <input type="text" name="BuscarI" 
+                            placeholder="Codigo de la iniciativa" min="0" required
+                            class="form-control rounded-0 bg-dark border-0 text-white">
+                        <button class="btn btn-dark"> <img src="{{url_for('static', filename='img/2531409.png')}}"
+                                width="30px">
+                        </button>
+                    </div>
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="row">
+
+
+
+    <div class="col-md-12 offset-md-1">
+        <div class="col-md-10">
+            {% include 'partials/_messages.html' %}
+
+            <form action="/actualizar" method="POST" class="card bg-dark text-light">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <center class="form-control rounded-0 bg-dark border-0 text-white">
+                    <h4>Interactuar con la iniciativa</h4>
+                </center>
+
+                <div class="card-body p-4 row">
+                    <div class="col-md-2">
+
+                        <label for="codigo">Cod iniciativa</label>
+
+                        <input type="text" name="codigo" placeholder="ingresar codigo" required
+                            class="form-control  inputt  bg-dark   text-white" value="{{buscar.Codigo}}" readonly>
+
+                    </div>
+                    <div class="col-md-2">
+                        <label for="Empresa">Empresa:</label>
+                        <select name="Empresa"
+                            class="form-select form-select-sm inputt form-control  bg-dark  text-white">
+
+                            <option value="{{buscar.Empresa}}">{{buscar.Empresa}}</option>
+
+                            
+                            {% for R_empresas in R_empresa%}
+                            <option value="{{R_empresas.E_nombre}}">{{R_empresas.E_nombre}}</option>
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+                    <div class="col-md-2">
+
+                        <label for="ISSUE">
+                            ISSUE
+                        </label>
+                        <br>
+                        <input type="text" name="issue" placeholder="ISSUE" min="0" required
+                            class="form-control bg-dark inputt  text-white" value="{{buscar.issue}}">
+
+                    </div>
+
+                    <div class="col-md-5">
+                        <label for="responsable">RESPONSABLE:</label>
+
+                        <select name="responsable"
+                            class="form-select form-select-sm inputt form-control  bg-dark  text-white">
+
+                            <option value="{{buscar.RESPONSABLE}}">{{buscar.RESPONSABLE}}</option>
+                            {% for Funcionalesss in Funcionaless%}
+
+
+                            <option value="{{Funcionalesss.F_nombre}}">{{Funcionalesss.F_nombre}}</option>
+    
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="fullname">Nombre iniciativa:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" name="fullname" placeholder="Nombre" required
+                                class="form-control  inputt  bg-dark   text-white" value="{{buscar.Nombre_Iniciativa}}">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="card-body p-4 row">
+
+
+                    <div class="col-md-2">
+                        <div>
+                            <h6>peticion y AP:</h6>
+                        </div>
+                        <br>
+
+                        <label for="peticion">PETICION:</label>
+                        <select name="peticion"
+                            class="form-select form-select-sm inputt form-control  {{color.claseEstado}}  text-white"
+                            onchange="this.className=this.options[this.selectedIndex].className">
+
+                            <option
+                                class="form-select form-select-sm inputt form-control {{color.claseEstado}}  text-white"
+                                value="{{buscar.PETICION}}">{{buscar.PETICION}}</option>
+                            <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                value="OK">OK
+                            </option>
+                            <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                value="NOK">NOK
+                            </option>
+                            <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                value="Pendiente">Pendiente</option>
+                            <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                value="N/A">
+                                N/A</option>
+
+
+                        </select>
+
+                        <div class="mb-3">
+                            <label for="VoBo_oferta">VoBo oferta:</label>
+                            <select name="VoBo_oferta"
+                                class="form-select form-select-sm inputt form-control  {{colorVOF.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{colorVOF.claseEstado}}  text-white"
+                                    value="{{buscar.VoBo_Oferta_EX}}">{{buscar.VoBo_Oferta_EX}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+                            </select>
+
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="VoBo_Df">VoBo Df:</label>
+                            <select name="VoBo_Df"
+                                class="form-select form-select-sm inputt form-control  {{ColVf.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColVf.claseEstado}}  text-white"
+                                    value="{{buscar.VoBo_FunctionalDesign_EX}}">{{buscar.VoBo_FunctionalDesign_EX}}
+                                </option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+                            </select>
+
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="VoBo_E380">VoBo E380:</label>
+                            <select name="VoBo_E380"
+                                class="form-select form-select-sm inputt form-control  {{ColE380.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColE380.claseEstado}}  text-white"
+                                    value="{{buscar.VoBo_E380_EX}}">{{buscar.VoBo_E380_EX}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+                            </select>
+
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="VoBo_UAT">VoBo UAT:</label>
+                            <select name="VoBo_UAT"
+                                class="form-select form-select-sm inputt form-control  {{ColVUaT.claseEstado}}   text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColVUaT.claseEstado}}  text-white"
+                                    value="{{buscar.VoBo_E380_UAT_EX}}">{{buscar.VoBo_E380_UAT_EX}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+                            </select>
+
+
+                        </div>
+                        
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <div>
+                            <h6>Documentacion 1:</h6>
+                        </div>
+                        <br>
+                        <label for="oferta_eco">Oferta ECO:</label>
+                        <select name="oferta_eco"
+                            class="form-select form-select-sm inputt form-control {{ColOE.claseEstado}}  text-white"
+                            onchange="this.className=this.options[this.selectedIndex].className">
+
+                            <option
+                                class="form-select form-select-sm inputt form-control {{ColOE.claseEstado}}  text-white"
+                                value="{{buscar.Oferta_Economica}}">{{buscar.Oferta_Economica}}</option>
+                            <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                value="OK">OK
+                            </option>
+                            <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                value="NOK">NOK
+                            </option>
+                            <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                value="Pendiente">Pendiente</option>
+                            <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                value="N/A">
+                                N/A</option>
+
+
+                        </select>
+
+                        <div class="mb-3">
+                            <label for="oferta_tec">oferta TEC:</label>
+                            <select name="oferta_tec"
+                                class="form-select form-select-sm inputt form-control {{ColOt.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColOt.claseEstado}}  text-white"
+                                    value="{{buscar.Oferta_Tecnica}}">{{buscar.Oferta_Tecnica}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+                            </select>
+
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="estimador">Estimador:</label>
+                            <select name="estimador"
+                                class="form-select form-select-sm inputt form-control {{ColE.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColE.claseEstado}}  text-white"
+                                    value="{{buscar.Estimador}}">{{buscar.Estimador}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+                            </select>
+
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="Plan_interno">Plan interno:</label>
+                            <select name="Plan_interno"
+                                class="form-select form-select-sm inputt form-control {{ColPi.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColPi.claseEstado}}  text-white"
+                                    value="{{buscar.Plan_Interno}}">{{buscar.Plan_Interno}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+                            </select>
+
+
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="riesgos_prod">Riesgos de prod:</label>
+                            <select name="riesgos_prod"
+                                class="form-select form-select-sm inputt form-control {{ColNR.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColNR.claseEstado}}  text-white"
+                                    value="{{buscar.Nivel_de_Riesgo_de_Producto}}">
+                                    {{buscar.Nivel_de_Riesgo_de_Producto}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+
+                            </select>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <div>
+                            <h6>Documentacion 2</h6>
+                        </div>
+                        <label>Documento:</label>
+                        <label for="Dis_funcional">Diseño funcional:</label>
+                        <select name="Dis_funcional"
+                            class="form-select form-select-sm inputt form-control {{ColFDFD.claseEstado}}  text-white"
+                            onchange="this.className=this.options[this.selectedIndex].className">
+
+                            <option
+                                class="form-select form-select-sm inputt form-control {{ColFDFD.claseEstado}}  text-white"
+                                value="{{buscar.FD_Functional_Design}}">{{buscar.FD_Functional_Design}}</option>
+                            <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                value="OK">OK
+                            </option>
+                            <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                value="NOK">NOK
+                            </option>
+                            <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                value="Pendiente">Pendiente</option>
+                            <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                value="N/A">
+                                N/A</option>
+
+
+                        </select>
+
+                        <div class="mb-3">
+                            <label for="Dis_tec">Diseño Tecnico:</label>
+                            <select name="Dis_tec"
+                                class="form-select form-select-sm inputt form-control {{ColE420DT.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColE420DT.claseEstado}}  text-white"
+                                    value="{{buscar.E420_Diseño_Tecnico}}">{{buscar.E420_Diseño_Tecnico}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+                            </select>
+
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="Set_prueba">Set de prueba:</label>
+                            <select name="Set_prueba"
+                                class="form-select form-select-sm inputt form-control {{ColSPSP.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColSPSP.claseEstado}}  text-white"
+                                    value="{{buscar.SP_Set_Pruebas}}">{{buscar.SP_Set_Pruebas}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+                            </select>
+
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="E380">E380:</label>
+                            <select name="E380"
+                                class="form-select form-select-sm inputt form-control {{ColE380PLP.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColE380PLP.claseEstado}}  text-white"
+                                    value="{{buscar.E380_Plan_Pruebas}}">{{buscar.E380_Plan_Pruebas}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+                            </select>
+
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="Prue_Uni">Pruebas Unitarias:</label>
+                            <select name="Prue_Uni"
+                                class="form-select form-select-sm inputt form-control {{ColPU.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColPU.claseEstado}}  text-white"
+                                    value="{{buscar.Plan_Pruebas_Unitarias}}">{{buscar.Plan_Pruebas_Unitarias}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+                            </select>
+
+                        </div>
+
+                        <label for="Guia_integracion">Guia de integracion:</label>
+                        <select name="Guia_integracion"
+                            class="form-select form-select-sm inputt form-control {{ColGI.claseEstado}}  text-white"
+                            onchange="this.className=this.options[this.selectedIndex].className">
+                            <option
+                                class="form-select form-select-sm inputt form-control {{ColGI.claseEstado}}  text-white"
+                                value="{{buscar.Guia_Integracion}}">{{buscar.Guia_Integracion}}</option>
+                            <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                value="OK">OK
+                            </option>
+                            <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                value="NOK">NOK
+                            </option>
+                            <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                value="Pendiente">Pendiente</option>
+                            <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                value="N/A">
+                                N/A</option>
+
+
+                        </select>
+
+                    </div>
+                    <div class="col-md-2">
+
+                        <div>
+                            <h6>Documentacion 3</h6>
+                        </div>
+                        <label>Check list:</label>
+                        <div class="mb-3">
+                            <label for="C_dis_fun">Diseño funcional:</label>
+                            <select name="C_dis_fun"
+                                class="form-select form-select-sm inputt form-control {{ColCLFD.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColCLFD.claseEstado}}  text-white"
+                                    value="{{buscar.CL_Functional_Design}}">{{buscar.CL_Functional_Design}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="C_dis_tec">Diseño Tecnico:</label>
+                            <select name="C_dis_tec"
+                                class="form-select form-select-sm inputt form-control {{ColE420CL.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColE420CL.claseEstado}}  text-white"
+                                    value="{{buscar.CL_E420_Diseno_Tecnico}}">{{buscar.CL_E420_Diseno_Tecnico}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="C_E380">E380:</label>
+                            <select name="C_E380"
+                                class="form-select form-select-sm inputt form-control {{ColClE380PLP.claseEstado}}  text-white"
+                                onchange="this.className=this.options[this.selectedIndex].className">
+
+                                <option
+                                    class="form-select form-select-sm inputt form-control {{ColClE380PLP.claseEstado}}  text-white"
+                                    value="{{buscar.CL_E380_Plan_Pruebas}}">{{buscar.CL_E380_Plan_Pruebas}}</option>
+                                <option class="form-select form-select-sm inputt form-control bg-success  text-white"
+                                    value="OK">OK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-danger  text-white"
+                                    value="NOK">NOK</option>
+                                <option class="form-select form-select-sm inputt form-control bg-warning  text-white"
+                                    value="Pendiente">Pendiente</option>
+                                <option class="form-select form-select-sm inputt form-control bg-primary  text-white"
+                                    value="N/A">N/A</option>
+
+                            </select>
+
+
+                        </div>
+                        <div class="mb-3">
+
+                            <a class="btn btn-primary" href="/InterArchivo/{{buscar.Codigo}}/Save" >Ver o Guardar archivos</a>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <br>
+                        <br>
+                        <div class="mb-4">
+
+                            <label for="observaciones">observaciones:</label>
+                            <textarea name="observaciones" class="form-control"
+                                aria-label="With textarea">{{buscar.Observacion}}</textarea>
+                        </div>
+                        <div class="mb-4">
+
+                            <label for="observaciones">Fecha de Creacion:</label>
+                                <input type="text" name="fecha_c" placeholder="ingresar codigo" required
+                            class="form-control  inputt  bg-dark   text-white" value="{{buscar.fecha_actual}}" readonly>
+                        </div>
+                        <div class="mb-4">
+
+                            <label for="observaciones">Fecha de Modificacion:</label>
+                            <input type="text" name="fecha_m" placeholder="ingresar codigo" required
+                            class="form-control  inputt  bg-dark   text-white" value="{{buscar.fecha_modificacion}}" readonly>
+                        </div>
+                        <div class="mb-4">
+
+                            <label for="observaciones">Usuario Modificador:</label>
+                            <input type="text" name="modificador" placeholder="ingresar codigo" required
+                            class="form-control  inputt  bg-dark   text-white" value="{{buscar.usuario}}" readonly>
+                        </div>
+                        <button class="btn btn-primary btn-sm rounded-0">Actualizar</button>
+                        <a class="btn btn-danger btn-sm rounded-0" href="/Delete/{{buscar.Codigo}}">Eliminar</a>
+                        <br>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{%endblock%}

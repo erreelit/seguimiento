@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+
+
+{{message}}
+
+
+
+
+{% endfor %}
+{% endif %}
+
+{% endwith %}
+<div>
+
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <form action="/updateUs/{{resul.id}}" method="POST" class="card bg-dark text-light">
+
+
+                <center class="form-control rounded-0 bg-dark border-0 text-white">
+                    <h4>actualizar usuario</h4>
+                </center>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <div class="card-body p4">
+
+                    <div class="mb-3">
+                        <label for="tipousu">Tipo de usuario:</label>
+                        <select name="tipo_usu"
+                            class="form-select form-select-sm form-control  inputt bg-dark  text-white">
+
+
+                            <option value="Tester">Tester</option>
+
+
+                            <option value="Funcional">Funcional</option>
+
+
+
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" placeholder="nombre" required value="{{resul.nombre}}"
+                            class="form-control  inputt bg-dark  text-white">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="numerodoc">numero de documento:</label>
+                        <input type="text" name="numeDoc" placeholder="numeDoc" min="0" ondrop=" return false"
+                            onpaste="return false;" required value="{{resul.num_doc}}"
+                            class="form-control  inputt bg-dark  text-white" readonly>
+                    </div>
+
+                    <center>
+                        <div class="mb-3">
+                            <button class="btn btn-primary btn-sm rounded-0">actualizar</button>
+
+                        </div>
+                    </center>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+{% endblock %}

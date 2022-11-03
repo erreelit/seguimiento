@@ -1,0 +1,3 @@
+inicio.bat
+
+cmd /k

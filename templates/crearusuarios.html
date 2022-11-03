@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div>
+
+  <div class="row">
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-3">
+
+      <form action="/creatUsu" method="POST" class="card bg-dark text-light">
+        {% include 'partials/_messages.html' %}
+
+        <div class="card-body p-4">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <center class="form-control rounded-0 bg-dark border-0 text-white">
+            <h4>Registrar usuario</h4>
+          </center>
+
+          <div class="mb">
+            <label for="tipo">Tipo de privilegios</label>
+            <select name="tipo_usu" class="form-select form-select-sm form-control  inputt bg-dark  text-white">
+
+              <option value="Tester">Tester</option>
+
+
+              <option value="Funcional">Funcional</option>
+
+            </select>
+
+          </div>
+
+          <div class="mb-3">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" placeholder="nombre" required
+              class="form-control  inputt bg-dark  text-white">
+
+          </div>
+
+          <div class="mb-3">
+            <label for="numerdc">Numero de documento</label>
+            <input type="number" name="numeDoc" placeholder="Numero de documento" min="0" ondrop=" return false"
+              onpaste="return false;" required class="form-control  inputt bg-dark  text-white">
+          </div>
+          <div class="mb-3">
+            <label for="contrasena">contraseña:</label>
+            <input type="text" name="contrasena" placeholder="contraseña" required
+              class="form-control  inputt bg-dark  text-white">
+          </div>
+          <div class="mb-3">
+            <button class="btn btn-primary btn-sm rounded-0">Guardar usuario</button>
+          </div>
+
+        </div>
+
+      </form>
+
+
+    </div>
+
+    <div class="col-md-4">
+
+
+      <table class="table table-striped  table-bordered card card-body p-4">
+
+        <tr>
+          <th>tipo de usuario</th>
+          <th>nombre</th>
+          <th>accion 1</th>
+          <th>accion 2</th>
+        </tr>
+
+        {% for busques in busque%}
+
+        <tr>
+
+          <td>{{busques.Rol}}</td>
+          <td>{{busques.nombre}}</td>
+          <td>
+
+
+            <a href="/deleteUs/{{busques.id}}" class="btn btn-danger btn-sm rounded-0">eliminar</a>
+
+          </td>
+
+          <td>
+            <a href="/updateUs/{{busques.id}}" class="btn btn-primary btn-sm rounded-0">actualizar</a>
+          </td>
+
+        </tr>
+
+        {% endfor %}
+      </table>
+
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+{% endblock %}

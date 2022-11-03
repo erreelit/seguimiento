@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+
+<div>
+
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <form action="/updateEmpr/{{resul.id}}" method="POST" class="card bg-dark text-light">
+
+
+                <center class="form-control rounded-0 bg-dark border-0 text-white">
+                    <h4>Actualizar Empresa</h4>
+                </center>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+
+
+                <center> {{message}}</center>
+
+
+
+
+                {% endfor %}
+                {% endif %}
+
+                {% endwith %}
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <div class="card-body p4">
+
+
+                    <div class="mb-3">
+                        <label for="E_nombre">Nombre de la Empresa:</label>
+                        <input type="text" name="E_nombre" placeholder="nombre" required value="{{resul.E_nombre}}"
+                            class="form-control  inputt bg-dark  text-white">
+                    </div>
+
+                    <center>
+                        <div class="mb-3">
+                            <button class="btn btn-primary btn-sm rounded-0">actualizar</button>
+
+                        </div>
+                    </center>
+
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

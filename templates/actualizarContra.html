@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+
+<div>
+
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <form action="/updateUs2" method="POST" class="card bg-dark text-light">
+
+
+                <center class="form-control rounded-0 bg-dark border-0 text-white">
+                    <h4>actualizar usuario</h4>
+                </center>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+
+
+                <center> {{message}}</center>
+
+
+
+
+                {% endfor %}
+                {% endif %}
+
+                {% endwith %}
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <div class="card-body p4">
+
+
+                    <div class="mb-3">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" placeholder="nombre" required value="{{current_user.nombre}}"
+                            class="form-control  inputt bg-dark  text-white">
+                    </div>
+
+
+
+                    <div class="mb-3">
+                        <label for="numerodoc">contraseña nueva:</label>
+                        <input type="password" name="contrasena" placeholder="contrasena" min="0" ondrop=" return false"
+                            onpaste="return false;" required value="{{current_user.contrasena}}"
+                            class="form-control  inputt bg-dark  text-white">
+                    </div>
+                    <div class="mb-3">
+                        <label for="numerodoc">repetir contraseña:</label>
+                        <input type="password" name="contrasena2" placeholder="contrasena" min="0"
+                            ondrop=" return false" onpaste="return false;" required value="{{current_user.contrasena}}"
+                            class="form-control  inputt bg-dark  text-white">
+                    </div>
+
+                    <center>
+                        <div class="mb-3">
+                            <button class="btn btn-primary btn-sm rounded-0">actualizar</button>
+
+                        </div>
+                    </center>
+
+
+
+
+
+
+                </div>
+
+
+
+
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+{% endblock %}

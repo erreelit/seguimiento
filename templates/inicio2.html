@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+<div class="col-md-8">
+
+
+
+
+
+
+</div>
+<div class="row">
+
+
+
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        {% include 'partials/_messages.html' %}
+
+        <div class="col-md-9 offset-md-1 row">
+            <div class="col-md-6">
+                <div class="mb-3  bg-dark">
+                    <form action="/buscarINI" method="POST" class="bg-dark text-light">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                        <div class="input-group mb-3">
+                            <input type="text" name="BuscarI" 
+                                placeholder="Codigo de la iniciativa" min="0" required
+                                class="form-control rounded-0 bg-dark border-0 text-white">
+                            <button class="btn btn-dark"> <img src="{{url_for('static', filename='img/2531409.png')}}"
+                                    width="30px">
+                            </button>
+                        </div>
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{%endblock%}

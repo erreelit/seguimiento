@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div>
+
+  <div class="row">
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-3">
+
+      <form action="/SaveEm" method="POST" class="card bg-dark text-light">
+        {% include 'partials/_messages.html' %}
+
+        <div class="card-body p-4">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <center class="form-control rounded-0 bg-dark border-0 text-white">
+            <h4>Registrar Empresa</h4>
+          </center>
+
+          <div class="mb-3">
+            <label for="E_nombre">Nombre de la Empresa:</label>
+            <input type="text" name="E_nombre" placeholder="nombre" required
+              class="form-control  inputt bg-dark  text-white">
+
+          </div>
+          <div class="mb-3">
+            <button class="btn btn-primary btn-sm rounded-0">Registrar Empresa</button>
+          </div>
+
+        </div>
+
+      </form>
+
+
+    </div>
+
+    <div class="col-md-4">
+
+
+      <table class="table table-striped  table-bordered card card-body p-4">
+
+        <tr>
+          <th>nombre</th>
+          <th>accion 1</th>
+          <th>accion 2</th>
+        </tr>
+
+        {% for empres in empre%}
+
+        <tr>
+
+          <td>{{empres.E_nombre}}</td>
+          <td>
+
+
+            <a href="/DeleteEm/{{empres.id}}" class="btn btn-danger btn-sm rounded-0">eliminar</a>
+
+          </td>
+
+          <td>
+            <a href="/updateEmpr/{{empres.id}}" class="btn btn-primary btn-sm rounded-0">actualizar</a>
+          </td>
+
+        </tr>
+
+        {% endfor %}
+      </table>
+
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+{% endblock %}
